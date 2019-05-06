@@ -10,8 +10,8 @@ using TodoWebAPI.Core.DataModels;
 namespace TodoWebAPI.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20190506074058_20190506_0940_First_Migration")]
-    partial class _20190506_0940_First_Migration
+    [Migration("20190506131427_20190506_1514_Migration")]
+    partial class _20190506_1514_Migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,9 +23,8 @@ namespace TodoWebAPI.Migrations
 
             modelBuilder.Entity("TodoWebAPI.Core.DataModels.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("CategoryId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Bug")
                         .HasMaxLength(250);
@@ -44,12 +43,11 @@ namespace TodoWebAPI.Migrations
                     b.Property<Guid>("TodoId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<Guid?>("CategoryId");
 
-                    b.Property<DateTime>("Created");
+                    b.Property<DateTime?>("Created");
 
                     b.Property<string>("Creator")
-                        .IsRequired()
                         .HasMaxLength(120);
 
                     b.Property<DateTime>("Deadline");
@@ -58,7 +56,7 @@ namespace TodoWebAPI.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<DateTime>("LastModified");
+                    b.Property<DateTime?>("LastModified");
 
                     b.Property<string>("Modifier")
                         .HasMaxLength(120);
@@ -69,13 +67,16 @@ namespace TodoWebAPI.Migrations
 
                     b.Property<Guid?>("ParentId");
 
-                    b.Property<int>("Priority");
+                    b.Property<string>("Priority")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<string>("Responsible")
                         .HasMaxLength(120);
 
-                    b.Property<int>("Status")
-                        .HasMaxLength(50);
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.HasKey("TodoId");
 

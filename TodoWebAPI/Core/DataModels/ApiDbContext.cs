@@ -1,31 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace TodoWebAPI.Core.DataModels
 {
-    public class ApiDbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class ApiDbContext : DbContext
     {
-        public Microsoft.EntityFrameworkCore.DbSet<Todo> Todos { get; set; }
+        public DbSet<Todo> Todos { get; set; }
 
         public ApiDbContext(DbContextOptions<ApiDbContext> options) : base(options)
         {
 
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Entity<Todo>()
                 .Property(e => e.Priority)
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (PriorityEnum)Enum.Parse(typeof(PriorityEnum), v));
+                .HasConversion<string>()
+                .HasMaxLength(100);
 
             modelBuilder
                 .Entity<Todo>()
                 .Property(e => e.Status)
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (StatusEnum)Enum.Parse(typeof(StatusEnum), v));
+                .HasConversion<string>()
+                .HasMaxLength(100);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 

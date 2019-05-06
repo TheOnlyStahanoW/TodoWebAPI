@@ -1,10 +1,9 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TodoWebAPI.Migrations
 {
-    public partial class _20190506_0940_First_Migration : Migration
+    public partial class _20190506_1514_Migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,8 +11,7 @@ namespace TodoWebAPI.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CategoryId = table.Column<Guid>(nullable: false),
                     Bug = table.Column<string>(maxLength: 250, nullable: true),
                     Task = table.Column<string>(nullable: true),
                     Epic = table.Column<bool>(nullable: false)
@@ -28,18 +26,18 @@ namespace TodoWebAPI.Migrations
                 columns: table => new
                 {
                     TodoId = table.Column<Guid>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: true),
+                    CategoryId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(maxLength: 120, nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    Priority = table.Column<int>(nullable: false),
+                    Priority = table.Column<string>(maxLength: 100, nullable: false),
                     Responsible = table.Column<string>(maxLength: 120, nullable: true),
                     Deadline = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<int>(maxLength: 50, nullable: false),
+                    Status = table.Column<string>(maxLength: 100, nullable: false),
                     ParentId = table.Column<Guid>(nullable: true),
                     Deleted = table.Column<bool>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Creator = table.Column<string>(maxLength: 120, nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: true),
+                    Creator = table.Column<string>(maxLength: 120, nullable: true),
+                    LastModified = table.Column<DateTime>(nullable: true),
                     Modifier = table.Column<string>(maxLength: 120, nullable: true)
                 },
                 constraints: table =>

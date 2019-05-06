@@ -9,8 +9,8 @@ namespace TodoWebAPI.Core.DataModels
 {
     public class Category
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CategoryId { get; set; }
+        [Key]
+        public Guid CategoryId { get; set; }
         [StringLength(250)]
         public string Bug { get; set; }
         public string Task { get; set; }
