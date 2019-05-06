@@ -42,8 +42,8 @@ namespace TodoWebAPI.Controllers
         }
 
         // PUT: api/Todo/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTodo(Guid id, Todo todo)
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PutTodo(Guid id, Todo todo)
         {
             if (id != todo.TodoId)
             {
@@ -75,6 +75,15 @@ namespace TodoWebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Todo>> CreateTodo(Todo todo)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            todo.Created = DateTime.Now;
+            todo.Creator = HttpContext.User?.Identity?.Name;
+            todo.LastModified = DateTime.Now;
+
             _context.Todos.Add(todo);
             await _context.SaveChangesAsync();
 

@@ -33,18 +33,18 @@ namespace TodoWebAPI.Core.DataModels
 
     public enum PriorityEnum
     {
-        Low = 0,
-        Normal = 1,
-        High = 2,
-        ASAP = 3
+        Low,
+        Normal,
+        High,
+        ASAP
     }
 
     public enum StatusEnum
     {
-        Started = 0,
-        InProgress = 1,
-        OnHalt = 2,
-        Completed = 3,
-        Dropped = 4
+        Started,
+        InProgress,
+        OnHalt,
+        Completed,
+        Dropped
     }
 }
