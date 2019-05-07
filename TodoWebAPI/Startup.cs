@@ -12,6 +12,8 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
 using TodoModels.Core.DataModels;
+using TodoServices.Interfaces;
+using TodoServices.Services;
 
 namespace TodoWebAPI
 {
@@ -28,8 +30,10 @@ namespace TodoWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApiDbContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("TodoWebAPI")));
             services.AddHealthChecks();
+
+            services.AddScoped(typeof(ITodoService<Todo>), typeof(TodoService));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
