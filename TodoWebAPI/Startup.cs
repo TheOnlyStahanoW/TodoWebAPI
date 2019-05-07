@@ -33,7 +33,7 @@ namespace TodoWebAPI
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("TodoWebAPI")));
             services.AddHealthChecks();
 
-            services.AddScoped(typeof(ITodoService<Todo>), typeof(TodoService));
+            services.AddScoped<ICrudService<Todo>, TodoService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

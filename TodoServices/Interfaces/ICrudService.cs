@@ -5,7 +5,7 @@ using TodoModels.Core.DataModels;
 
 namespace TodoServices.Interfaces
 {
-    public interface ITodoService<T> where T : Todo
+    public interface ICrudService<T> where T : class
     {
         Task<T> Create(T item);
         Task<T> Update(Guid id, T item);

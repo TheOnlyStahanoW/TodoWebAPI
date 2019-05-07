@@ -14,9 +14,9 @@ namespace TodoWebAPI.Controllers
     [ApiController]
     public class TodoController : ControllerBase
     {
-        protected readonly ITodoService<Todo> _todoService;
+        protected readonly ICrudService<Todo> _todoService;
 
-        public TodoController(ITodoService<Todo> todoService)
+        public TodoController(ICrudService<Todo> todoService)
         {
             _todoService = todoService;
         }
@@ -84,7 +84,6 @@ namespace TodoWebAPI.Controllers
             return Ok(todo);
         }
 
-        // DELETE: api/Todo/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Todo>> DeleteTodo(Guid id)
         {
@@ -98,7 +97,6 @@ namespace TodoWebAPI.Controllers
             return NoContent();
         }
 
-        // GET: api/Todo
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Todo>>> Read()
         {
@@ -106,7 +104,6 @@ namespace TodoWebAPI.Controllers
             return Ok(list);
         }
 
-        // GET: api/Todo/5
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<Todo>> Read(Guid id)
         {

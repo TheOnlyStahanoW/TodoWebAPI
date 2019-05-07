@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TodoModels.Core.Enums;
 using System;
 
 namespace TodoModels.Core.DataModels
@@ -46,10 +47,10 @@ namespace TodoModels.Core.DataModels
                         CategoryId = Guid.Parse("36d32656-8df1-437d-a323-28d9e099a82c"),
                         Name = "Teszt 122 jó kis Data Seed teszt",
                         Description = "Jó kis leírással",
-                        Deadline = new System.DateTime(2019, 5, 10, 15, 41, 0),
-                        Created = new System.DateTime(2019, 5, 7, 11, 20, 0),
+                        Deadline = new DateTime(2019, 5, 10, 15, 41, 0),
+                        Created = new DateTime(2019, 5, 7, 11, 20, 0),
                         Creator = "Teszt Józska",
-                        LastModified = new System.DateTime(2019, 5, 10, 15, 41, 0),
+                        LastModified = new DateTime(2019, 5, 10, 15, 41, 0),
                         Modifier = "Teszt Józska"
                     },
                     new Todo()
@@ -58,10 +59,10 @@ namespace TodoModels.Core.DataModels
                         CategoryId = Guid.Parse("3b916b1d-a7db-4d8b-be3a-b8df53e9e90a"),
                         Name = "Gyomlálás a betonházban",
                         Description = "Jó kis leírással - még mindig.",
-                        Deadline = new System.DateTime(2019, 8, 21, 19, 25, 0),
-                        Created = new System.DateTime(2019, 4, 12, 09, 14, 0),
+                        Deadline = new DateTime(2019, 8, 21, 19, 25, 0),
+                        Created = new DateTime(2019, 4, 12, 09, 14, 0),
                         Creator = "Trab Antal",
-                        LastModified = new System.DateTime(2019, 4, 12, 09, 14, 0),
+                        LastModified = new DateTime(2019, 4, 12, 09, 14, 0),
                         Modifier = "Trab Antal"
                     },
                     new Todo()
@@ -70,12 +71,12 @@ namespace TodoModels.Core.DataModels
                         CategoryId = Guid.Parse("e30d079b-30eb-41a5-b4ab-57628925554a"),
                         Name = "Vonatkerék pumpálása régi Ikarussal",
                         Description = "Tegnapelőttre kéne köszi.",
-                        Deadline = new System.DateTime(2019, 6, 19, 16, 30, 0),
-                        Priority = Enums.PriorityEnum.ASAP,
-                        Status = Enums.StatusEnum.InProgress,
-                        Created = new System.DateTime(2019, 1, 2, 11, 30, 12),
+                        Deadline = new DateTime(2019, 6, 19, 16, 30, 0),
+                        Priority = PriorityEnum.ASAP,
+                        Status = StatusEnum.InProgress,
+                        Created = new DateTime(2019, 1, 2, 11, 30, 12),
                         Creator = "Havasi Gyopál",
-                        LastModified = new System.DateTime(2019, 4, 23, 22, 31, 31),
+                        LastModified = new DateTime(2019, 4, 23, 22, 31, 31),
                         Modifier = "Teszt Józska"
                     },
                     new Todo()
@@ -84,12 +85,12 @@ namespace TodoModels.Core.DataModels
                         CategoryId = Guid.Parse("e30d079b-30eb-41a5-b4ab-57628925554a"),
                         Name = "Fedettpályás távolbalátás gyakorlása két vak egérrel.",
                         Description = "Mélyvízben.",
-                        Priority = Enums.PriorityEnum.High,
-                        Status = Enums.StatusEnum.Completed,
-                        Deadline = new System.DateTime(2019, 2, 12, 5, 30, 0),
-                        Created = new System.DateTime(2018, 12, 31, 23, 59, 30),
+                        Priority = PriorityEnum.High,
+                        Status = StatusEnum.Completed,
+                        Deadline = new DateTime(2019, 2, 12, 5, 30, 0),
+                        Created = new DateTime(2018, 12, 31, 23, 59, 30),
                         Creator = "Teszt Elek",
-                        LastModified = new System.DateTime(2019, 2, 12, 05, 0, 0),
+                        LastModified = new DateTime(2019, 2, 12, 05, 0, 0),
                         Modifier = "Akárki"
                     }
                 );

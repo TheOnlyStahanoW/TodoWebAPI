@@ -9,7 +9,7 @@ using TodoModels.Core.DataModels;
 
 namespace TodoServices.Services
 {
-    public class TodoService : ITodoService<Todo>
+    public class TodoService : ICrudService<Todo>
     {
         protected readonly ApiDbContext _apiDbContext;
 
@@ -35,15 +35,8 @@ namespace TodoServices.Services
         {
             _apiDbContext.Entry(todo).State = EntityState.Modified;
 
-            try
-            {
-                await _apiDbContext.SaveChangesAsync();
-                return todo;
-            }
-            catch
-            {
-                return null;
-            }
+            await _apiDbContext.SaveChangesAsync();
+            return todo;
          }
 
         public async Task<Todo> Delete(Guid id)
