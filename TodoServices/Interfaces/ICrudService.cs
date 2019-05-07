@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using TodoModels.Core.DataModels;
 
 namespace TodoServices.Interfaces
 {
@@ -10,7 +9,7 @@ namespace TodoServices.Interfaces
         Task<T> Create(T item);
         Task<T> Update(Guid id, T item);
         Task<T> Delete(Guid id);
-        Task<IEnumerable<T>> Read();
+        Task<IQueryable<T>> Read();
         Task<T> Read(Guid id);
         Task<T> ReadNotTracked(Guid id);
     }

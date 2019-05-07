@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TodoServices.Interfaces;
 using TodoModels.Core.DataModels;
+using TodoModels.Core.Enums;
 
 namespace TodoServices.Services
 {
@@ -54,9 +55,9 @@ namespace TodoServices.Services
             return todo;
         }
 
-        public async Task<IEnumerable<Todo>> Read()
+        public Task<IQueryable<Todo>> Read()
         {
-            return await _apiDbContext.Todos.ToListAsync();
+            return Task.FromResult(_apiDbContext.Todos.AsQueryable());
         }
 
         public async Task<Todo> Read(Guid id)

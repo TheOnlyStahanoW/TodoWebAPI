@@ -92,6 +92,105 @@ namespace TodoModels.Core.DataModels
                         Creator = "Teszt Elek",
                         LastModified = new DateTime(2019, 2, 12, 05, 0, 0),
                         Modifier = "Akárki"
+                    },
+                    //childitems
+                     new Todo()
+                     {
+                         TodoId = Guid.Parse("e78d64e5-390e-4076-b7b7-4618c42a6c92"),
+                         CategoryId = Guid.Parse("36d32656-8df1-437d-a323-28d9e099a82c"),
+                         Name = "Gyerektodo - 1 gyökérelem 1. gyereke",
+                         Description = "Jó kis leírással",
+                         Deadline = new DateTime(2019, 5, 10, 15, 41, 0),
+                         Created = new DateTime(2019, 5, 7, 11, 20, 0),
+                         Creator = "Teszt Józska",
+                         LastModified = new DateTime(2019, 5, 10, 15, 41, 0),
+                         Modifier = "Teszt Józska",
+                         ParentId = Guid.Parse("992a47fb-4512-4e39-8670-7d9c18f59c8b")
+                     },
+                    new Todo()
+                    {
+                        TodoId = Guid.Parse("2d60d13f-84ef-4158-a485-0b141a1fac7b"),
+                        CategoryId = Guid.Parse("3b916b1d-a7db-4d8b-be3a-b8df53e9e90a"),
+                        Name = "Gyerektodo - 1 gyökérelem 2. gyereke",
+                        Description = "Jó kis leírással - még mindig.",
+                        Deadline = new DateTime(2019, 8, 21, 19, 25, 0),
+                        Created = new DateTime(2019, 4, 12, 09, 14, 0),
+                        Creator = "Trab Antal",
+                        LastModified = new DateTime(2019, 4, 12, 09, 14, 0),
+                        Modifier = "Trab Antal",
+                        ParentId = Guid.Parse("992a47fb-4512-4e39-8670-7d9c18f59c8b")
+                    },
+                    new Todo()
+                    {
+                        TodoId = Guid.Parse("05c8e0a6-fb14-41a2-87d2-e0b3a41dae04"),
+                        CategoryId = Guid.Parse("e30d079b-30eb-41a5-b4ab-57628925554a"),
+                        Name = "Gyerektodo - 2 gyökérelem 1. gyereke",
+                        Description = "Tegnapelőttre kéne köszi.",
+                        Deadline = new DateTime(2019, 6, 19, 16, 30, 0),
+                        Priority = PriorityEnum.ASAP,
+                        Status = StatusEnum.InProgress,
+                        Created = new DateTime(2019, 1, 2, 11, 30, 12),
+                        Creator = "Havasi Gyopál",
+                        LastModified = new DateTime(2019, 4, 23, 22, 31, 31),
+                        Modifier = "Teszt Józska",
+                        ParentId = Guid.Parse("35aefa2b-d5d7-4d05-b53e-c51847e9e6ac")
+                    },
+                    new Todo()
+                    {
+                        TodoId = Guid.Parse("25bef90e-4624-4c31-a94f-8ee6b3ab9615"),
+                        CategoryId = Guid.Parse("e30d079b-30eb-41a5-b4ab-57628925554a"),
+                        Name = "Gyerektodo - 1 gyökérelem 3. gyereke",
+                        Description = "Mélyvízben.",
+                        Priority = PriorityEnum.High,
+                        Status = StatusEnum.Completed,
+                        Deadline = new DateTime(2019, 2, 12, 5, 30, 0),
+                        Created = new DateTime(2018, 12, 31, 23, 59, 30),
+                        Creator = "Teszt Elek",
+                        LastModified = new DateTime(2019, 2, 12, 05, 0, 0),
+                        Modifier = "Akárki",
+                        ParentId = Guid.Parse("992a47fb-4512-4e39-8670-7d9c18f59c8b")
+                    },
+                    //lower level childitems
+                     new Todo()
+                     {
+                         TodoId = Guid.Parse("e352fcb9-97f3-4eb4-b3a4-2f6436904996"),
+                         CategoryId = Guid.Parse("36d32656-8df1-437d-a323-28d9e099a82c"),
+                         Name = "1. gyökérelem 1 gyerekének 1 algyereke",
+                         Description = "Jó kis leírással",
+                         Deadline = new DateTime(2019, 5, 10, 15, 41, 0),
+                         Created = new DateTime(2019, 5, 7, 11, 20, 0),
+                         Creator = "Teszt Józska",
+                         LastModified = new DateTime(2019, 5, 10, 15, 41, 0),
+                         Modifier = "Teszt Józska",
+                         ParentId = Guid.Parse("e78d64e5-390e-4076-b7b7-4618c42a6c92")
+                     },
+                    new Todo()
+                    {
+                        TodoId = Guid.Parse("0e979331-df23-4867-96ee-507706ac4268"),
+                        CategoryId = Guid.Parse("3b916b1d-a7db-4d8b-be3a-b8df53e9e90a"),
+                        Name = "1. gyökérelem 1 gyerekének 2 algyereke",
+                        Description = "Jó kis leírással - még mindig.",
+                        Deadline = new DateTime(2019, 8, 21, 19, 25, 0),
+                        Created = new DateTime(2019, 4, 12, 09, 14, 0),
+                        Creator = "Trab Antal",
+                        LastModified = new DateTime(2019, 4, 12, 09, 14, 0),
+                        Modifier = "Trab Antal",
+                        ParentId = Guid.Parse("e78d64e5-390e-4076-b7b7-4618c42a6c92")
+                    },
+                    new Todo()
+                    {
+                        TodoId = Guid.Parse("212e0a73-e210-4d36-91b0-57b24138376c"),
+                        CategoryId = Guid.Parse("e30d079b-30eb-41a5-b4ab-57628925554a"),
+                        Name = "1. gyökérelem 2 gyerekének 1 algyereke",
+                        Description = "Tegnapelőttre kéne köszi.",
+                        Deadline = new DateTime(2019, 6, 19, 16, 30, 0),
+                        Priority = PriorityEnum.ASAP,
+                        Status = StatusEnum.InProgress,
+                        Created = new DateTime(2019, 1, 2, 11, 30, 12),
+                        Creator = "Havasi Gyopál",
+                        LastModified = new DateTime(2019, 4, 23, 22, 31, 31),
+                        Modifier = "Teszt Józska",
+                        ParentId = Guid.Parse("05c8e0a6-fb14-41a2-87d2-e0b3a41dae04")
                     }
                 );
 

@@ -11,7 +11,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
+
 using TodoModels.Core.DataModels;
+using TodoModels.Core.Settings;
 using TodoServices.Interfaces;
 using TodoServices.Services;
 
@@ -34,6 +36,9 @@ namespace TodoWebAPI
             services.AddHealthChecks();
 
             services.AddScoped<ICrudService<Todo>, TodoService>();
+            services.AddScoped<ICrudService<Category>, CategoryService>();
+
+            services.Configure<TodoControllerSettings>(Configuration.GetSection("TodoControllerSettings"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
