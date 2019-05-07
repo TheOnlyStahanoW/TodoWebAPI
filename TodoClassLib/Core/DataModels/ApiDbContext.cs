@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace TodoWebAPI.Core.DataModels
+namespace TodoClassLib.Core.DataModels
 {
     public class ApiDbContext : DbContext
     {

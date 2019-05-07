@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using TodoWebAPI.Core.Enums;
+using TodoClassLib.Core.Enums;
 
-namespace TodoWebAPI.Core.DataModels
+namespace TodoClassLib.Core.DataModels
 {
     public class Todo
     {

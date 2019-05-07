@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TodoWebAPI.Core.DataModels;
-using TodoWebAPI.Core.Enums;
+using TodoModels.Core.DataModels;
+using TodoModels.Core.Enums;
 
 namespace TodoWebAPI.Controllers
 {
@@ -28,7 +27,8 @@ namespace TodoWebAPI.Controllers
         {
             todo.Created = DateTime.Now;
             todo.Creator = "Teszt Pista"; //HttpContext.User?.Identity?.Name; -- majd a későbbi autentikált user neve kell ide
-            todo.LastModified = DateTime.Now;
+            todo.LastModified = todo.Created;
+            todo.Modifier = "Teszt Pista"; //HttpContext.User?.Identity?.Name; -- majd a későbbi autentikált user neve kell ide
 
             if (!ModelState.IsValid)
             {
@@ -66,11 +66,13 @@ namespace TodoWebAPI.Controllers
             {
                 if (originalTodo.Priority != todo.Priority)
                 {
-                    return BadRequest("You can't change the Priority after the todo has been completed!");
+                    ModelState.AddModelError("Priority", "You can't change the Priority after the todo has been completed!");
+                    return BadRequest(ModelState);
                 }
                 if (todo.Status != originalTodo.Status)
                 {
-                    return BadRequest("This todo is already completed, you can't change the status of it!");
+                    ModelState.AddModelError("Status", "This todo is already completed, you can't change the status of it!");
+                    return BadRequest(ModelState);
                 }
             }
 
@@ -108,7 +110,7 @@ namespace TodoWebAPI.Controllers
 
             await _context.SaveChangesAsync();
 
-            return todo;
+            return NoContent();
         }
 
         // GET: api/Todo

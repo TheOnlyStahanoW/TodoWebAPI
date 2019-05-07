@@ -10,9 +10,8 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
-using TodoWebAPI.Core.DataModels;
+using TodoModels.Core.DataModels;
 
 namespace TodoWebAPI
 {
