@@ -37,6 +37,7 @@ namespace TodoWebAPI
 
             services.AddScoped<ICrudService<Todo>, TodoService>();
             services.AddScoped<ICrudService<Category>, CategoryService>();
+            services.AddScoped<ITodoStoredProcedureService, TodoStoredProcedureService>();
             services.AddScoped<ITodoReadService, TodoReadService>();
 
             services.Configure<TodoControllerSettings>(Configuration.GetSection("TodoControllerSettings"));

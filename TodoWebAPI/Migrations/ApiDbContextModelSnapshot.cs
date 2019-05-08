@@ -73,7 +73,7 @@ namespace TodoWebAPI.Migrations
 
                     b.Property<Guid?>("CategoryId");
 
-                    b.Property<DateTime?>("Created");
+                    b.Property<DateTime>("Created");
 
                     b.Property<string>("Creator")
                         .HasMaxLength(120);

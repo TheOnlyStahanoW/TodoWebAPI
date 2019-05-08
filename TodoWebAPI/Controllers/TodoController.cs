@@ -19,13 +19,16 @@ namespace TodoWebAPI.Controllers
     {
         protected readonly ICrudService<Todo> _todoService;
         protected readonly ITodoReadService _todoReadService;
+        protected readonly ITodoStoredProcedureService _todoStoredProcedureService;
         protected readonly ICrudService<Category> _categoryService;
         protected readonly IOptions<TodoControllerSettings> _todoControllerSettings;
 
-        public TodoController(ICrudService<Todo> todoService, ITodoReadService todoReadService, ICrudService<Category> categoryService, IOptions<TodoControllerSettings> todoControllerSettings)
+        public TodoController(ICrudService<Todo> todoService, ITodoReadService todoReadService, ITodoStoredProcedureService todoStoredProcedureService, 
+            ICrudService<Category> categoryService, IOptions<TodoControllerSettings> todoControllerSettings)
         {
             _todoService = todoService;
             _todoReadService = todoReadService;
+            _todoStoredProcedureService = todoStoredProcedureService;
             _categoryService = categoryService;
             _todoControllerSettings = todoControllerSettings;
         }
@@ -163,6 +166,14 @@ namespace TodoWebAPI.Controllers
         public async Task<ActionResult<Dictionary<string, List<Todo>>>> ReadTree()
         {
             var todoQueryableList = await _todoReadService.ReadTree();
+
+            return Ok(todoQueryableList);
+        }
+
+        [HttpGet("readonlyidandname")]
+        public async Task<ActionResult<IEnumerable<TodoHeader>>> ReadOnlyIdAndName()
+        {
+            var todoQueryableList = await _todoStoredProcedureService.ReadOnlyIdAndName();
 
             return Ok(todoQueryableList);
         }

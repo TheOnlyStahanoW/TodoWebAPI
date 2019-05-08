@@ -10,8 +10,8 @@ using TodoModels.Core.DataModels;
 namespace TodoWebAPI.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20190507144630_new")]
-    partial class @new
+    [Migration("20190508103939_20190508_1239_Remigration")]
+    partial class _20190508_1239_Remigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,7 +75,7 @@ namespace TodoWebAPI.Migrations
 
                     b.Property<Guid?>("CategoryId");
 
-                    b.Property<DateTime?>("Created");
+                    b.Property<DateTime>("Created");
 
                     b.Property<string>("Creator")
                         .HasMaxLength(120);

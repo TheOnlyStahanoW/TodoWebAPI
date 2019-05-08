@@ -28,6 +28,12 @@ namespace TodoModels.Core.DataModels
                 .HasConversion<string>()
                 .HasMaxLength(100);
 
+            modelBuilder
+                .Entity<Todo>()
+                .HasQueryFilter(m => m.Deleted == false);
+
+            modelBuilder.Query<TodoHeader>();
+
             //for testing purposes
             modelBuilder
                 .Entity<Category>()
