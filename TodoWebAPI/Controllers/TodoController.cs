@@ -18,12 +18,14 @@ namespace TodoWebAPI.Controllers
     public class TodoController : ControllerBase
     {
         protected readonly ICrudService<Todo> _todoService;
+        protected readonly ITodoReadService _todoReadService;
         protected readonly ICrudService<Category> _categoryService;
         protected readonly IOptions<TodoControllerSettings> _todoControllerSettings;
 
-        public TodoController(ICrudService<Todo> todoService, ICrudService<Category> categoryService, IOptions<TodoControllerSettings> todoControllerSettings)
+        public TodoController(ICrudService<Todo> todoService, ITodoReadService todoReadService, ICrudService<Category> categoryService, IOptions<TodoControllerSettings> todoControllerSettings)
         {
             _todoService = todoService;
+            _todoReadService = todoReadService;
             _categoryService = categoryService;
             _todoControllerSettings = todoControllerSettings;
         }
@@ -134,80 +136,35 @@ namespace TodoWebAPI.Controllers
                 return NotFound();
             }
 
-            var todoList = await _todoService.Read();
+            var todoQueryableList = await _todoReadService.ReadByCategory(categoryId);
 
-            if (todoList == null)
-            {
-                return NotFound();
-            }
-
-            return todoList.Where(x => x.CategoryId == categoryId).ToList();
+            return Ok(todoQueryableList);
         }
 
         [HttpGet("readopentodosandlatests")]
         public async Task<ActionResult<IEnumerable<Todo>>> ReadOpenTodosAndLatests()
         {
-            var todoList = await _todoService.Read();
+            var todoQueryableList = await _todoReadService.ReadOpenTodosAndLatests(_todoControllerSettings.Value.ReadLatestsIntervalInHours);
 
-            return todoList
-                .Where(x => x.Status != StatusEnum.Completed || x.LastModified >= DateTime.Now.AddHours(-1 * _todoControllerSettings.Value.ReadLatestsIntervalInHours))
-                .OrderByDescending(x => x.LastModified)
-                .ToList(); 
+            return Ok(todoQueryableList);
         }
 
         //Original solution: https://docs.microsoft.com/en-us/dotnet/csharp/linq/group-query-results
         [HttpGet("readgroupbycategory")]
         public async Task<ActionResult> ReadGroupByCategory()
         {
-            var todoList = await _todoService.Read();
-            var categoryList = await _categoryService.Read();
-            List<CategoryGroupModel> categoryGroupModelList = new List<CategoryGroupModel>();
+            var todoQueryableList = await _todoReadService.ReadGroupByCategory();
 
-            var queryGroupByCategory =
-                    from todoItem in todoList
-                    where todoItem.CategoryId != null
-                    group todoItem by todoItem.CategoryId into newGroup
-                    orderby newGroup.Key
-                    select newGroup;
-
-            foreach (var categoryGroup in queryGroupByCategory)
-            {
-                CategoryGroupModel newCategoryGroupItem = new CategoryGroupModel() { CategoryId = (Guid)categoryGroup.Key};
-
-                foreach (var cGroupItem in categoryGroup)
-                {
-                    newCategoryGroupItem.TodoItems.Add(cGroupItem);
-                }
-
-                categoryGroupModelList.Add(newCategoryGroupItem);
-            }
-
-            return Ok(categoryGroupModelList);
+            return Ok(todoQueryableList);
         }
 
         //Original solution link: https://stackoverflow.com/questions/444296/how-to-efficiently-build-a-tree-from-a-flat-structure
         [HttpGet("readtree")]
-        public async Task<ActionResult<IEnumerable<TreeModel>>> ReadTree()
+        public async Task<ActionResult<Dictionary<string, List<Todo>>>> ReadTree()
         {
-            var todoList = await _todoService.Read();
+            var todoQueryableList = await _todoReadService.ReadTree();
 
-            if (todoList == null)
-            {
-                return NotFound();
-            }
-
-            Dictionary<Guid, TreeModel> treeDataStructure = new Dictionary<Guid, TreeModel>();
-            todoList.ToList().ForEach(x => treeDataStructure.Add((Guid)x.TodoId, new TreeModel { NodeTodo = x }));
-
-            foreach (var item in treeDataStructure.Values)
-            {
-                if (item.NodeTodo.ParentId != null)
-                {
-                    treeDataStructure[(Guid)item.NodeTodo.ParentId.Value].ChildItems.Add(item);
-                }
-            }
-
-            return Ok(treeDataStructure.Values.Where(x => x.NodeTodo.ParentId == null));
+            return Ok(todoQueryableList);
         }
     }
 }
