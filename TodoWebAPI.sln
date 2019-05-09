@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoWebAPI", "TodoWebAPI\TodoWebAPI.csproj", "{6159086F-024D-4852-ADD3-2C01B84FBA62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoModels", "TodoModels\TodoModels.csproj", "{A6C77C9F-D4C9-438F-9917-3B452D97EF09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoModels", "TodoModels\TodoModels.csproj", "{A6C77C9F-D4C9-438F-9917-3B452D97EF09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoServices", "TodoServices\TodoServices.csproj", "{495B6D51-37BB-48E5-A9FD-1F8499B96930}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoServices", "TodoServices\TodoServices.csproj", "{495B6D51-37BB-48E5-A9FD-1F8499B96930}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoUnitTest", "TodoUnitTest\TodoUnitTest.csproj", "{ACF0214B-6C49-454C-B6DE-3F20182D2BE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{495B6D51-37BB-48E5-A9FD-1F8499B96930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{495B6D51-37BB-48E5-A9FD-1F8499B96930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{495B6D51-37BB-48E5-A9FD-1F8499B96930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACF0214B-6C49-454C-B6DE-3F20182D2BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACF0214B-6C49-454C-B6DE-3F20182D2BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACF0214B-6C49-454C-B6DE-3F20182D2BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACF0214B-6C49-454C-B6DE-3F20182D2BE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

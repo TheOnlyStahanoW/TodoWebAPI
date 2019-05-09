@@ -34,6 +34,13 @@ namespace TodoServices.Services
 
         public async Task<Todo> Update(Guid id, Todo todo)
         {
+            var originalTodo = await this.ReadNotTracked(id);
+
+            if (originalTodo == null)
+            {
+                return null;
+            }
+
             _apiDbContext.Entry(todo).State = EntityState.Modified;
 
             await _apiDbContext.SaveChangesAsync();
