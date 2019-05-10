@@ -10,7 +10,7 @@ namespace TodoWebAPI.Extensions
         {
             return modelState.Where(x => x.Value.ValidationState == ModelValidationState.Invalid)
                     .Select(x => new { item = x.Key, message = x.Value.Errors.Select(y => y.ErrorMessage)})
-                    .AsEnumerable();
+                    .ToList();
         }
     }
 }

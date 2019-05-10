@@ -34,7 +34,7 @@ namespace TodoWebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Todo>> Create(Todo todo)
+        public async Task<IActionResult> Create(Todo todo)
         {
             if (!ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace TodoWebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Todo>> DeleteTodo(Guid id)
+        public async Task<IActionResult> DeleteTodo(Guid id)
         {
             var todo = await _todoService.Delete(id);
 
@@ -110,14 +110,14 @@ namespace TodoWebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Todo>>> Read()
+        public async Task<IActionResult> Read()
         {
             var list = await _todoService.Read();
             return Ok(list);
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<Todo>> Read(Guid id)
+        public async Task<IActionResult> Read(Guid id)
         {
             var todo = await _todoService.Read(id);
 
@@ -126,11 +126,11 @@ namespace TodoWebAPI.Controllers
                 return NotFound();
             }
 
-            return todo;
+            return Ok(todo);
         }
 
         [HttpGet("readbycategory/{categoryId:guid}")]
-        public async Task<ActionResult<IEnumerable<Todo>>> ReadByCategory(Guid categoryId)
+        public async Task<IActionResult> ReadByCategory(Guid categoryId)
         {
             var category = await _categoryService.Read(categoryId);
 
@@ -145,7 +145,7 @@ namespace TodoWebAPI.Controllers
         }
 
         [HttpGet("readopentodosandlatests")]
-        public async Task<ActionResult<IEnumerable<Todo>>> ReadOpenTodosAndLatests()
+        public async Task<IActionResult> ReadOpenTodosAndLatests()
         {
             var todoQueryableList = await _todoReadService.ReadOpenTodosAndLatests(_todoControllerSettings.Value.ReadLatestsIntervalInHours);
 
@@ -154,7 +154,7 @@ namespace TodoWebAPI.Controllers
 
         //Original solution: https://docs.microsoft.com/en-us/dotnet/csharp/linq/group-query-results
         [HttpGet("readgroupbycategory")]
-        public async Task<ActionResult> ReadGroupByCategory()
+        public async Task<IActionResult> ReadGroupByCategory()
         {
             var todoQueryableList = await _todoReadService.ReadGroupByCategory();
 
@@ -163,7 +163,7 @@ namespace TodoWebAPI.Controllers
 
         //Original solution link: https://stackoverflow.com/questions/444296/how-to-efficiently-build-a-tree-from-a-flat-structure
         [HttpGet("readtree")]
-        public async Task<ActionResult<Dictionary<string, List<Todo>>>> ReadTree()
+        public async Task<IActionResult> ReadTree()
         {
             var todoQueryableList = await _todoReadService.ReadTree();
 
@@ -171,7 +171,7 @@ namespace TodoWebAPI.Controllers
         }
 
         [HttpGet("readonlyidandname")]
-        public async Task<ActionResult<IEnumerable<TodoHeader>>> ReadOnlyIdAndName()
+        public async Task<IActionResult> ReadOnlyIdAndName()
         {
             var todoQueryableList = await _todoStoredProcedureService.ReadOnlyIdAndName();
 
