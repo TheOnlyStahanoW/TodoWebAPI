@@ -10,8 +10,8 @@ using TodoModels.Core.DataModels;
 namespace TodoWebAPI.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20190508103939_20190508_1239_Remigration")]
-    partial class _20190508_1239_Remigration
+    [Migration("20190514121442_Teszt")]
+    partial class Teszt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,6 +103,10 @@ namespace TodoWebAPI.Migrations
 
                     b.Property<string>("Responsible")
                         .HasMaxLength(120);
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("Status")
                         .IsRequired()

@@ -102,6 +102,10 @@ namespace TodoWebAPI.Migrations
                     b.Property<string>("Responsible")
                         .HasMaxLength(120);
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(100);

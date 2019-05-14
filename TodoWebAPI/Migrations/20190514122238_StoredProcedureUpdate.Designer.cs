@@ -10,8 +10,8 @@ using TodoModels.Core.DataModels;
 namespace TodoWebAPI.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20190508104018_StoredProcedure_Todo_GetTodosIdAndName")]
-    partial class StoredProcedure_Todo_GetTodosIdAndName
+    [Migration("20190514122238_StoredProcedureUpdate")]
+    partial class StoredProcedureUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,6 +103,10 @@ namespace TodoWebAPI.Migrations
 
                     b.Property<string>("Responsible")
                         .HasMaxLength(120);
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("Status")
                         .IsRequired()

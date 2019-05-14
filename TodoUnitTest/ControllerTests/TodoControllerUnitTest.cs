@@ -204,7 +204,7 @@ namespace TodoUnitTest.ControllerTests
         }
 
         [TestMethod]
-        public void Update_ValidData()
+        public void Model_ValidationCheck()
         {
             var todo = new Todo()
             {
@@ -300,7 +300,7 @@ namespace TodoUnitTest.ControllerTests
 
             mockTodoService.Setup(x => x.ReadNotTracked(It.IsAny<Guid>())).Returns(Task.FromResult(originalTodo));
 
-            var updateActionResult = todoController.Create(todo).Result as BadRequestObjectResult;
+            var updateActionResult = todoController.Update(todo.TodoId, todo).Result as BadRequestObjectResult;
             var updateResponseValue = updateActionResult.Value;
 
             Assert.IsInstanceOfType(updateActionResult, typeof(BadRequestObjectResult));
@@ -309,54 +309,6 @@ namespace TodoUnitTest.ControllerTests
 
         [TestMethod]
         public void Update_CompletedOriginalWithDifferentPriorityTodo()
-        {
-            var mockTodoService = new Mock<ICrudService<Todo>>();
-            var mockCategoryService = new Mock<ICrudService<Category>>();
-            var mockTodoReadService = new Mock<ITodoReadService>();
-            var mockTodoStoredProcedureService = new Mock<ITodoStoredProcedureService>();
-            TodoController todoController = new TodoController(mockTodoService.Object, mockTodoReadService.Object, mockTodoStoredProcedureService.Object, mockCategoryService.Object, mockTodoControllerSettings.Object);
-
-            var todo = new Todo()
-            {
-                TodoId = Guid.NewGuid(),
-                CategoryId = Guid.Parse("e30d079b-30eb-41a5-b4ab-57628925554a"),
-                Name = "Tök másra átnevezzük Unit Test-ben.",
-                Description = "Egy vonatkerékabroncs gyárban.",
-                Priority = PriorityEnum.High,
-                Status = StatusEnum.InProgress,
-                Deadline = new DateTime(2019, 2, 12, 5, 30, 0),
-                Created = new DateTime(2018, 12, 31, 23, 59, 30),
-                Creator = "Teszt Elek",
-                LastModified = new DateTime(2018, 12, 31, 23, 59, 30),
-                Modifier = "Teszt Elek"
-            };
-
-            var originalTodo = new Todo()
-            {
-                TodoId = Guid.NewGuid(),
-                CategoryId = Guid.Parse("e30d079b-30eb-41a5-b4ab-57628925554a"),
-                Name = "Update előtt voltam.",
-                Description = "Egy vonatkerékabroncs gyárban.",
-                Priority = PriorityEnum.High,
-                Status = StatusEnum.Completed,
-                Deadline = new DateTime(2019, 2, 12, 5, 30, 0),
-                Created = new DateTime(2018, 12, 31, 23, 59, 30),
-                Creator = "Teszt Elek",
-                LastModified = new DateTime(2018, 12, 31, 23, 59, 30),
-                Modifier = "Teszt Elek"
-            };
-
-            mockTodoService.Setup(x => x.ReadNotTracked(It.IsAny<Guid>())).Returns(Task.FromResult(originalTodo));
-
-            var updateActionResult = todoController.Create(todo).Result as BadRequestObjectResult;
-            var updateResponseValue = updateActionResult.Value;
-
-            Assert.IsInstanceOfType(updateActionResult, typeof(BadRequestObjectResult));
-            Assert.IsNotNull(updateResponseValue);
-        }
-
-        [TestMethod]
-        public void Update_CompletedOriginalWithDifferentPriorityAndStatusTodo()
         {
             var mockTodoService = new Mock<ICrudService<Todo>>();
             var mockCategoryService = new Mock<ICrudService<Category>>();
@@ -396,7 +348,55 @@ namespace TodoUnitTest.ControllerTests
 
             mockTodoService.Setup(x => x.ReadNotTracked(It.IsAny<Guid>())).Returns(Task.FromResult(originalTodo));
 
-            var updateActionResult = todoController.Create(todo).Result as BadRequestObjectResult;
+            var updateActionResult = todoController.Update(todo.TodoId, todo).Result as BadRequestObjectResult;
+            var updateResponseValue = updateActionResult.Value;
+
+            Assert.IsInstanceOfType(updateActionResult, typeof(BadRequestObjectResult));
+            Assert.IsNotNull(updateResponseValue);
+        }
+
+        [TestMethod]
+        public void Update_CompletedOriginalWithDifferentPriorityAndStatusTodo()
+        {
+            var mockTodoService = new Mock<ICrudService<Todo>>();
+            var mockCategoryService = new Mock<ICrudService<Category>>();
+            var mockTodoReadService = new Mock<ITodoReadService>();
+            var mockTodoStoredProcedureService = new Mock<ITodoStoredProcedureService>();
+            TodoController todoController = new TodoController(mockTodoService.Object, mockTodoReadService.Object, mockTodoStoredProcedureService.Object, mockCategoryService.Object, mockTodoControllerSettings.Object);
+
+            var todo = new Todo()
+            {
+                TodoId = Guid.NewGuid(),
+                CategoryId = Guid.Parse("e30d079b-30eb-41a5-b4ab-57628925554a"),
+                Name = "Tök másra átnevezzük Unit Test-ben.",
+                Description = "Egy vonatkerékabroncs gyárban.",
+                Priority = PriorityEnum.Low,
+                Status = StatusEnum.InProgress,
+                Deadline = new DateTime(2019, 2, 12, 5, 30, 0),
+                Created = new DateTime(2018, 12, 31, 23, 59, 30),
+                Creator = "Teszt Elek",
+                LastModified = new DateTime(2018, 12, 31, 23, 59, 30),
+                Modifier = "Teszt Elek"
+            };
+
+            var originalTodo = new Todo()
+            {
+                TodoId = Guid.NewGuid(),
+                CategoryId = Guid.Parse("e30d079b-30eb-41a5-b4ab-57628925554a"),
+                Name = "Update előtt voltam.",
+                Description = "Egy vonatkerékabroncs gyárban.",
+                Priority = PriorityEnum.High,
+                Status = StatusEnum.Completed,
+                Deadline = new DateTime(2019, 2, 12, 5, 30, 0),
+                Created = new DateTime(2018, 12, 31, 23, 59, 30),
+                Creator = "Teszt Elek",
+                LastModified = new DateTime(2018, 12, 31, 23, 59, 30),
+                Modifier = "Teszt Elek"
+            };
+
+            mockTodoService.Setup(x => x.ReadNotTracked(It.IsAny<Guid>())).Returns(Task.FromResult(originalTodo));
+
+            var updateActionResult = todoController.Update(todo.TodoId, todo).Result as BadRequestObjectResult;
             var updateResponseValue = updateActionResult.Value;
 
             Assert.IsInstanceOfType(updateActionResult, typeof(BadRequestObjectResult));

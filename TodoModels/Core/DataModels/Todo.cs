@@ -40,5 +40,8 @@ namespace TodoModels.Core.DataModels
                 return WorkHoursCalculation.GetWorkHoursSum(DateTime.Now, Deadline, new TimeSpan(9, 0, 0), new TimeSpan(17, 0, 0));
             }
         }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

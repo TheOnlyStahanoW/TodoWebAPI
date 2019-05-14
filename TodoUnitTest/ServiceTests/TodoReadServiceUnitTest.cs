@@ -79,6 +79,7 @@ namespace TodoUnitTest.ServiceTests
 
             Assert.IsInstanceOfType(todos, typeof(IEnumerable<TreeModel>));
             Assert.IsTrue(todos.Count() != 0);
+            Assert.IsTrue(todos.ElementAt(0).ChildItems.ElementAt(0).ChildItems.Count != 0);
         }
     }
 }

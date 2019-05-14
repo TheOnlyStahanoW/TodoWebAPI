@@ -32,6 +32,8 @@ namespace TodoModels.Core.DataModels
                 .Entity<Todo>()
                 .HasQueryFilter(m => m.Deleted == false);
 
+            modelBuilder.Entity<Todo>().Property(p => p.RowVersion).IsConcurrencyToken();
+
             modelBuilder.Query<TodoHeader>();
 
             //for testing purposes

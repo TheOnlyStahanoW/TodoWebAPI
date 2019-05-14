@@ -42,8 +42,8 @@ namespace TodoServices.Services
             }
 
             _apiDbContext.Entry(todo).State = EntityState.Modified;
-
             await _apiDbContext.SaveChangesAsync();
+
             return todo;
          }
 

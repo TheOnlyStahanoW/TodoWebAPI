@@ -4,17 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using TodoModels.Core.DataModels;
 using TodoModels.Core.Enums;
 using TodoModels.Core.Settings;
 using TodoServices.Interfaces;
+using TodoWebAPI.Attributes;
 using TodoWebAPI.Extensions;
 
 namespace TodoWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [LogActionFilter(true, true, true, true, true, true, true)]
     public class TodoController : ControllerBase
     {
         protected readonly ICrudService<Todo> _todoService;
@@ -23,7 +26,7 @@ namespace TodoWebAPI.Controllers
         protected readonly ICrudService<Category> _categoryService;
         protected readonly IOptions<TodoControllerSettings> _todoControllerSettings;
 
-        public TodoController(ICrudService<Todo> todoService, ITodoReadService todoReadService, ITodoStoredProcedureService todoStoredProcedureService, 
+        public TodoController(ICrudService<Todo> todoService, ITodoReadService todoReadService, ITodoStoredProcedureService todoStoredProcedureService,
             ICrudService<Category> categoryService, IOptions<TodoControllerSettings> todoControllerSettings)
         {
             _todoService = todoService;
@@ -86,7 +89,14 @@ namespace TodoWebAPI.Controllers
                 }
             }
 
-            todo = await _todoService.Update(id, todo);
+            try
+            {
+                todo = await _todoService.Update(id, todo);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return Conflict("Someone has modified this entry before.");
+            }
 
             if (todo == null)
             {

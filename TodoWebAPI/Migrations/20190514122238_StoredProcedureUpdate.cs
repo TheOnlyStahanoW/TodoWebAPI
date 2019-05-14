@@ -2,7 +2,7 @@
 
 namespace TodoWebAPI.Migrations
 {
-    public partial class StoredProcedure_Todo_GetTodosIdAndName : Migration
+    public partial class StoredProcedureUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
