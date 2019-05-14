@@ -87,8 +87,8 @@ namespace TodoWebAPI.Attributes
 
                 if (logResponseTime)
                 {
-                    //DateTime startDateTime = filterContext.
-                    Log("OnResultExecuted - Response Time", filterContext.RouteData, (DateTime.Now - DateTime.Now).TotalMilliseconds.ToString() + "ms");
+                    DateTime startDateTime = DateTime.Parse(filterContext.HttpContext.Request.Query.FirstOrDefault(x => x.Key == "startDateTime").Value.FirstOrDefault());
+                    Log("OnResultExecuted - Response Time", filterContext.RouteData, (DateTime.Now - startDateTime).TotalMilliseconds.ToString() + "ms");
                 }
             }
             catch (Exception ex)
